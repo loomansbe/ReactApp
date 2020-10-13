@@ -1,12 +1,9 @@
 import React from 'react';
-import {Platform} from 'react-native';
-import renderer from 'react-test-renderer';
-
+import { render } from '@testing-library/react';
 import App from './App';
 
-describe('App', () => {
-  it('has the right amount of children', () => {
-    const tree = renderer.create(<App />).toJSON();
-    expect(tree.children.length).toBe(Platform.OS === 'web' ? 5 : 6);
-  });
+test('renders learn react link', () => {
+  const { getByText } = render(<App />);
+  const linkElement = getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
 });
